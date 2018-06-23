@@ -9,6 +9,7 @@ const mailgun = new Mailgun({
 })
 
 const send = (req, res) => {
+  console.log(req.body)
   const { from, message } = req.body
 
   const mailData = {
