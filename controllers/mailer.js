@@ -9,14 +9,16 @@ const mailgun = new Mailgun({
 })
 
 const send = (req, res) => {
-  const { from, message } = req.body
+  const { name, email, message } = req.body
+
+  if (!name || !email || !message) return res.status(400).send({ status: 'error', response: 'All \'name\', \'email\' and \'message\' must be present.' })
 
   const mailData = {
     to: 'namaste@greenyoga.com.au',
-    from,
-    subject: `Green Yoga Contact Form - ${from}`,
+    from: email,
+    subject: `Green Yoga Contact Form - ${name}`,
     html: `
-      <b>From: </b>${from}<br />
+      <b>From: </b>${name} (${email})<br />
       <b>Message: </b>${message}`
   }
 
