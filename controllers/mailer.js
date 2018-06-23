@@ -9,13 +9,12 @@ const mailgun = new Mailgun({
 })
 
 const send = (req, res) => {
-  console.log(req.body)
   const { from, message } = req.body
 
   const mailData = {
     to: 'namaste@greenyoga.com.au',
     from,
-    subject: 'Green Yoga Contact Form',
+    subject: `Green Yoga Contact Form - ${from}`,
     html: `
       <b>From: </b>${from}<br />
       <b>Message: </b>${message}`
