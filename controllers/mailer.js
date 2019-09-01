@@ -8,15 +8,15 @@ const mailgun = new Mailgun({
   domain: DOMAIN_NAME
 })
 
-const send = (req, res) => {
+const contactForm = (adminEmail, siteName) => (req, res) => {
   const { name, email, message } = req.body
 
   if (!name || !email || !message) return res.status(400).send({ status: 'error', response: 'All \'name\', \'email\' and \'message\' must be present.' })
 
   const mailData = {
-    to: 'namaste@greenyoga.com.au',
+    to: adminEmail,
     from: email,
-    subject: `Green Yoga Contact Form - ${name}`,
+    subject: `${siteName} Contact Form - ${name}`,
     html: `
       <b>From: </b>${name} (${email})<br />
       <b>Message: </b>${message}`
@@ -28,5 +28,5 @@ const send = (req, res) => {
 }
 
 module.exports = {
-  send
+  contactForm
 }
